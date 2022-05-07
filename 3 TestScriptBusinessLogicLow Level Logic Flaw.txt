@@ -1,0 +1,34 @@
+Burp Scan issues to look for:
+	Password field with autocomplete enabled | Strict transport security not enforced>
+1. log unto web application> open Burp> intercept off
+2. WEBSITE> select a product that is larger than your credit to shop with> and click to enter the view
+3. WEBSITE> add to cart
+4. BURP> HTTP History> Raw> Code> SEND post/cart 302 status> TO REPEATER
+5. BURP> from REQUEST forward/SEND the post/cart to RESPONSE
+6. BURP> search for the quantity
+7. BURP> from REQUEST forward/SEND the post/cart to RESPONSE with a single digit quantity, then with double digit, then with three digits, etc until it errors, then use the last largest digits, so if 2 digits is largest, then use 99
+8. WEBSITE> clear the cart
+9. BURP> REPEATER> POST/CART> set qunatity to blank from REQUEST forward/SEND the post/cart to INTRUDER with the quantity blank
+10. Burp> INTRUDER> GO TO POSITIONS tab> attack type SNIPER> click CLEAR $> set quantity to 99> 
+11. Burp> PAYLOAD TAB> payload set 1> payload type NULL PAYLOADS> payload option CONTINUE INDEFINITELY> 
+12. Burp> OPTIONS TAB> NUMBER OF THREADS 15> click START ATTACK
+13. WEBSITE> intermittently refresh website to see reponse
+14. STOP ATTACK> 
+15. WEBSITE> clear cart as we now want to get the value to be negative
+16. Burp> change payload option GENERATE 325> 
+17. Burp> START ATTACK
+18. WAIT FOR ATTACK TO FINISH THEN RELOAD PAGE
+19. WEBSITE> reload page> you should now have a negative value.
+20. WEBSITE> add a different product to cart> with a lower value>
+21. WEBSITE> refresh cart
+22. Burp> Proxy> HTTP History> post/cart 302 status> SEND TO REPEATER
+23. Burp> Request> change quantity to to positive like 10> SEND TO RESPONSE
+24. WEBSITE> refresh page> quantity add> and value still negative
+25. BURP> increase the product quantity until you have 0 to 100 dollars/GBP or the amount within your shopping store credit.
+26. Burp> SEND TO INTRUDER> POSITIONS> click clear $> set amount to 99
+28. Burp> PAYLOAD TAB> payload set 1> payload type NULL PAYLOADS> payload option GENERATE 200> 
+29. Burp> OPTIONS TAB> NUMBER OF THREADS 15> click START ATTACK
+30. WEBSITE> intermittently reload web page
+31. Burp> go back to REPEATER> product 1> change quantity to get the right value> send negative values throguh repeater to response
+32. Burp> go to REPEATER> product 2> change quantity to get the right value> send negative values throguh repeater to response NB bewtween 0 and 100 dollars.
+33. Place order

@@ -1,0 +1,27 @@
+Burp Scan issues to look for:
+	Password field with autocomplete enabled | Strict transport security not enforced>
+1. WEBSITE> go to home page> open Burp> intercept off
+2. Burp> Target> Sitemap> Right Click> Engagement Tools> Discover Content> 
+3. Burp> Engagement Tools> Discover Content> Config Tab> Number of Discovery Threads 14> Number of Spider Threads 12> 
+4. Burp> Engagement Tools> Discover Content> Control Tab> Sessiosn...> Yes> find ADMIN> STOP SESSION
+5. Burp> Engagement Tools> Discover Content> Sitemap tab> Send get/Admin/Request (in URL column of rows) to REPEATER
+6. Burp> Repeater> Send to Response> look for hints to username in RESPONSE
+	e.g. Admin interface only available if logged in as a DontWannaCry user
+7. Website> Once hint is found in Burp Response> Go back to Website and REGISTER>
+	enter any username>
+	with the hint for email address on webpage> Email Client link> e.g. attacker@ac251f4f1fb6f14a80ac2bb7014e00a6.web-security-academy.net or email1+wearehackerone@gmail.com>
+	enter any password>
+8. Website> enter a password> click register.
+10. Website> click on verification link to confirm email address.
+11. Website> click log in>
+12. Website> Enter username and password> click login> go to my Account
+13. Website> copy your email address> e.g. attacker@ac251f4f1fb6f14a80ac2bb7014e00a6.web-security-academy.net
+14. Website> log out
+15. Website> register a new user> Copy the email address domain hint given on webpage>
+	e.g. @dontwannacry.com email address>
+	But do not actually register> 
+	go back to log in page
+16. Website> log on again with same first account> go to My Account> update email address to username@emailHint.
+	e.g slox4@dontwannacry.com
+20. Website> You should now see the admin panel.
+

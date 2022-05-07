@@ -1,0 +1,21 @@
+1. WEBSITE> open web application> open Burp> intercept off> log into website
+2. WEBSITE> view product that you have insufficient moeny for> add to cart
+3. WEBSITE> Place order with more than the credit you have> Result> Error, not enough credit
+4. BURP> send get/cart insufficient funds to REPEATER
+5. WEBSITE> view another product that you have sufficient money for> add to cart
+6. WEBSITE> go to cart> remove product with insufficient funds for
+7. WEBSITE> place order with product in cart that you have sufficient funds for> Order placed successfully
+8. BURP> send get/cart confirmation successful order to REPEATER
+9. BURP> Request> Copy order successfyl GET URL from Repeater Request> 
+10. BURP> Request> Replace Get URL for get/cart insufficient funds unsuccessful request with Get /cart confirmation successful order Get URL
+11. BURP> you will get> you have not checked out error
+12. Website> go back to web page> add expensive product you have insufficient funds for to cart
+13. BURP> Intercept> Proxy> Intercept On
+14. Website> Place Order
+15. BURP> Intercept> Proxy> Forward
+16. BURP> Intercept> Proxy> Raw tab> replace Get // unsuccessful order URL with Get //order-confirmation=true URL
+17. BURP> Intercept> Proxy> Forward> Intercept Off
+18. Website> Reload web page> order successful
+
+
+

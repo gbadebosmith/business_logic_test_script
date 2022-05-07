@@ -1,0 +1,61 @@
+1. log unto web application> open Burp> intercept off
+2. WEBSITE> login> stay logged in check box
+3. WEBSITE> post a comment
+4. WEBSITE> back to blog
+5. Burp> Proxy> intercept> On
+6. WEBSITE> post another comment
+7. Burp> Proxy> intercept> change email address in code to that without @gmail.com and change the name a little bit longer
+8. Burp> Proxy> intercept> FORWARD> INTERCEPT OFF
+9. WEBSITE> go back to blog> it should say invalid email address.
+10. Burp> Proxy> HTTP HISTORY> select the url from the /post/comment page and send to REPEATER
+11. Burp> Proxy> HTTP HISTORY> select the url from the invalid email address error page and send to REPEATER
+12. Burp> REPEATER>> REQUEST> for invalid email address> copy the cookie stay-logged-in=... before the colon to replace the notification cookie in the same code
+13. Burp> REPEATER>> REQUEST> for invalid email address with modified cookie> send to RESPONSE
+14. Burp> RESPONSE> you will see notification-header with username: digits> copy the DIGITS
+15. Burp> REPEATER> REQUEST> for /post/commment/> change email in csrf part of code to administrator: DIGITS
+16. Burp> REPEATER> REQUEST> for /post/commment/> send to RESPONSE>
+17. Burp> REPEATER> RESPONSE> for /post/commment/>you should get a 302 found 
+18. Burp> REPEATER> RESPONSE> for /post/commment/> copy the notification cookie hash
+19. Burp> REPEATER> REQUEST> for /invalid/email/> replace the notification cookie hash with that of /post/commnent/
+20. Burp> REPEATER> RESPONSE> for /invalid/email/> you should now get a 200 OK RESPONSE.
+21. Burp> REPEATER> REQUEST> for /invalid/email/> highlight notification cookie> send to DECODER
+22. Burp> Decoder> decode as url> decode as base 64> decode as base 64
+23. Burp> Decoder>Hex> select number next to zero 0> right click> delete bytes> Delete Cells> 23> click OK
+24. Burp> Decoder> encode as base 64> encode as url> copy encoded URL
+25. Burp> REPEATER> REQUEST> for /invalid/email/> paste encoded URL to replace notification= value
+26. Burp> REPEATER> REQUEST> for /invalid/email/> SEND TO RESPONSE
+27. Burp> REPEATER> RESPONSE> for /invalid/email/> you should get internal server error> should be multiples of 16 etc, which means the email address has to be atleast 16 characters> 
+28. Burp> REPEATER> REQUEST> for /post/comment/> csrf> email> change administrator to xxxxxxxxxadministrator
+29. Burp> REPEATER> REQUEST> for /post/comment/> SEND TO RESPONSE
+30. Burp> REPEATER> RESPONSE> for /post/comment/> 200 OK> copy value for notification=...
+31. Burp> REPEATER> REQUEST> for /invalid/email/> replace invalid email> notification= value with /post/comment/ notification value
+32. Burp> REPEATER> REQUEST> for /invalid/email/> SEND TO RESPONSE
+33. Burp> REPEATER> RESPONSE> for /invalid/email/> invalid email
+34. Burp> REPEATER> REQUEST> for /invalid/email/> copy value for notification=..> 
+35. SEND TO DECODER> decode as url> decode as base 64> right click on cells> DELETE BYTES> DELETE CELLS> 23
+36. Burp> Decoder> encode as base 64> encode as url> copy encoded URL
+37. Burp> REPEATER> REQUEST> for /invalid/email/> replace invalid email> notification= value with> decoded value from above step
+38. Burp> REPEATER> REQUEST> for /invalid/email/> SEND TO RESPONSE
+39. Burp> REPEATER> RESPONSE> for /invalid/email/> INVALID RESPONSE AGAIN
+40. Burp> REPEATER> REQUEST> for /post/comment/> SEND TO RESPONSE
+41. Burp> REPEATER> RESPONSE> for /post/comment/> 302 found> copy set-cookie: notfication= value>
+42. Burp> REPEATER> REQUEST> for /invalid/email/> replace invalid email> notification= with the one above>
+43. Burp> REPEATER> REQUEST> for /invalid/email/> SEND TO RESPONSE>
+44. Burp> REPEATER> RESPONSE> for /invalid/email/> INVALID EMAIL error
+45. Burp> REPEATER> REQUEST> for /invalid/email/>  copy notification= value> SEND TO DECODER>
+46. Burp> DECODER> decode as url> decode as base 64> right click on cells> DELETE BYTES> DELETE CELLS> 32
+47. Burp> Decoder> encode as base 64> encode as url> copy encoded URL
+48. Burp> REPEATER> REQUEST> for /invalid/email/> replace notification= value with the above encoded URL
+49. Burp> REPEATER> REQUEST> for /invalid/email/> SEND TO RESPONSE> You should get 200 ok SUCCESS.
+50. Burp> Proxy> HTTP HISTORY> select row of> GET> 200> longest length> e.g. 5030> Authentication Bypass> click on code> SEND TO REPEATER>
+51. Burp> REPEATER> REQUEST> for GET / HTTP/1.1> delete session= and its value.> replace stay-logged-in= value with the encoded URL.
+52. Burp> REPEATER> REQUEST> for GET / HTTP/1.1> SEND TO RESPONSE
+53. WEBSITE> refresh web page
+54. Burp> Proxy> Intercept> On>
+55. WEBSITE> refresh web page> 
+56. Burp> Proxy> Intercept> Raw> code> remove session= and its value>
+57. Burp> Proxy> Intercept> Raw> code> replace stay-logged-in value with encoded URL
+58. Burp> Proxy> Intercept> FORWARD> FORWARD> 
+59. WEBSITE> REFRESH web page> INTERCEPT OFF.
+60. WEBSITE> ADMIN panel should be displayed
+

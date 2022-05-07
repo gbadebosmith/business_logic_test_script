@@ -1,0 +1,37 @@
+1. log unto web application> open Burp> intercept off
+2. WEBSITE> select a product above your credit limit> and click to enter the view
+3. WEBSITE> add to cart> go to cart> remove item from cart
+4. WEBSITE> open home tab in new window> add product to cart within your credit limit
+5. WEBSITE> add email address to sign up for newsletter> click submit
+6. WEBSITE> pop up will appear> copy promo code
+7. WEBSITE> go to my cart> add new coupon code> submit
+8. WEBSITE> it deducts considerably more from your total
+9. WEBSITE> place order> successful 
+10. WEBSITE> copy promo code from landing page
+11. WEBSITE> go to My account> redeem giftcard
+12. WEBSITE> paste second promo code into input box for giftcard
+13. WEBSITE> click redeem
+14. BURP> Project Options tab> SESSIONS> click ADD> SCOPE tab> select INCLUDE ALL URLs.
+15. BURP> Project Options tab> DETAILS tab> click ADD> RUN MACRO> SELECT MACRO> ADD> RECORD MACRO> select the following records
+16. POST Cart/coupon + POST cart/checkout + POST gift/card + GET cart/order-confirmation?order...> click OK
+17. MACRO ITEMS> click on GET cart/order-confirmation?order...> click CONFIGURE ITEM> 
+18. CONFIGURE MACRO ITEM> ADD
+19. PARAMETER NAME> gift-card
+20. UPDATE CONFIG BASED ON SELECTION BELOW> copy promo code from code below> click OK
+21. click OK again> 
+22. MACRO ITEMS> select POST> /gift-card> click CONFIGURE ITEM> 
+23. CONFIGURE MACRO ITEM> PARAMETER HANDLING> gift-card> picklist> DERIVE FROM PRIOR RESPONSE> click OK
+24. click TEST MACRO
+25. once run with 200 and 302 reponse> click OK
+26. click OK twice more until you return to BURP> Project Options tab> SESSIONS>
+27. BURP> PROXY> HTTP HISTORY> select GET /my-account record> send to INTRUDER
+28. BURP> INTRUDER> POSITIONS> CLEAR $> 
+29. BURP> INTRUDER> PAYLOADS> PAYLOADS SETS> PAYLOAD TYPE> NULL PAYLOADS
+30. BURP> INTRUDER> PAYLOADS> PAYLOADS SETS> PAYLOAD OPTIONS> GENERATE 415 PAYLOADS
+31. BURP> INTRUDER> OPTIONS> NUMBER OF THREADS> 1
+32. BURP> INTRUDER> OPTIONS> START ATTACK
+33. WEBSITE> refresh page intermittently during attack> this takes a while> maybe 30 minutes
+34. WEBSITE> while refreshing page> credit will keep increasing
+35. When Burp attack finishes running> go to home page
+36. WEBSITE> go to that expensive product that you now have sufficient funds for> add it to cart
+37. WEBSITE> place order> order successful

@@ -1,0 +1,17 @@
+1. WEBSITE> log into web application> open Burp> intercept off
+2. Burp> Target> Sitemap> Right Click> Engagement Tools> Discover Content> 
+3. Burp> Engagement Tools> Discover Content> Config Tab> Number of Discovery Threads 14> Number of Spider Threads 12> Co
+4. Burp> Engagement Tools> Discover Content> Control Tab> Sessiosn...> Yes> find ADMIN> STOP SESSION
+5. Burp> Engagement Tools> Discover Content> Sitemap tab> Send Get Admin/Request (in URL column of rows) to REPEATER
+6. Burp> Repeater> Send to Response> 401 unauthorised> look for hints to username in RESPONSE such as administrator> 
+7. Website> log on again with same account> leave user role as is
+8. Website> log out> Burp> Proxy> Intercept> HTTP History> select POST role selector record
+9. Burp> Proxy> Intercept> Intercept On>
+10. Website> log on again with same account> 
+11. Burp> Proxy> Intercept> Forward>
+12. Burp> Proxy> Intercept> Drop>
+13. Burp> Proxy> Intercept> Intercept Off>
+14. Website> remove role selector from URL> and log in again
+15. you should be able to see admin panel 
+
+

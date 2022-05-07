@@ -1,0 +1,30 @@
+Burp Scan issues to look for:
+	Password field with autocomplete enabled | Strict transport security not enforced>
+1. WEBSITE> log unto web application> open Burp> intercept off
+2. Burp> Target> Sitemap> Domain URL> Right Click> Engagement Tools> Discover Content> 
+3. Burp> Engagement Tools> Discover Content> Config Tab> Number of Discovery Threads 14> Number of Spider Threads 12> 
+4. Burp> Engagement Tools> Discover Content> Control Tab> Sessiosn is not running> Yes> 
+5. Burp> Engagement Tools> Discover Content> Sitemap tab>(in URL column of rows)> filter on /admin> SEND to REPEATER
+6. Burp> Repeater> Send to Response> look for hints to username in RESPONSE
+7. Website> Once hint is found in Burp Response> Go back to Website and register with the hint for user for later.> user = DontWannaCry
+8. Website> Register> Enter User Name> Enter Email as follows>
+	Use 200 characters for email address> e.g.> wkfnjdgdnbjgnbdgdsgnksdgnksdgnssgdndjkgndgjkndgknafifhgoiofghioghgiaffgsgddgghfhdhfhfhxcgghjhgkhkkkjhjhlhjljhljhjhlhjlhjlfdhkbfufbofffifbkjhbfkcbbcufufjfbdjkfbdjfbodufbsafjfbskfkbfjlksfbslfbsjlfbjsbfj
+	then append with email address domain> e.g. email client> @ac9d1f911fa512f7804c18c5014b0022.web-security-academy.net>
+	then you get wkfnjdgdnbjgnbdgdsgnksdgnksdgnssgdndjkgndgjkndgknafifhgoiofghioghgiaffgsgddgghfhdhfhfhxcgghjhgkhkkkjhjhlhjljhljhjhlhjlhjlfdhkbfufbofffifbkjhbfkcbbcufufjfbdjkfbdjfbodufbsafjfbskfkbfjlksfbslfbsjlfbjsbfj@ac9d1f911fa512f7804c18c5014b0022.web-security-academy.net
+	Note> to get string length of 200> go to> https://codebeautify.org/calculate-string-length
+9. Website> enter a password> click register.
+10. Website> click on verification link to confirm email address.
+11. Website> click log in
+12. Website> Enter username and password> click login> go to my Account
+13. Website> copy your lengthy email address
+	wkfnjdgdnbjgnbdgdsgnksdgnksdgnssgdndjkgndgjkndgknafifhgoiofghioghgiaffgsgddgghfhdhfhfhxcgghjhgkhkkkjhjhlhjljhljhjhlhjlhjlfdhkbfufbofffifbkjhbfkcbbcufufjfbdjkfbdjfbodufbsafjfbskfkbfjlksfbslfbsjlfbjsbfj@ac9d1f911fa512f7804c18c5014b0022.web-security-academy.
+14. Website> log out
+15. Website> register a new user> enter new username> 
+16. Website> register with the same username minus the dot plus extra characters> use 255 chars for the email address with the user hint @DontWannaCry.com then append with email address domain this time instead of 200> like so>
+		asdDAJofbbadadojsfsfsasddosufosufgsfugswkfnjdgdnbjgnbdgdsgnksdgnksdgnssgdndjkgndgjkndgknafifhgoiofghioghgiaffgsgddgghfhdhfhfhxcgghjhgkhkkkjhjhlhjljhjhjhlhjlhjlfdhkbfufbofffifbkjhbfkcbbcufufjfbdjkfbdjfbodufbsafjfbskfkbfjlksfbslfbsjlfbjsbfj@dontwannacry.com
+		then append  dot.email domain address> to become 313 chars> like so>
+			asdDAJofbbadadojsfsfsasddosufosufgsfugswkfnjdgdnbjgnbdgdsgnksdgnksdgnssgdndjkgndgjkndgknafifhgoiofghioghgiaffgsgddgghfhdhfhfhxcgghjhgkhkkkjhjhlhjljhjhjhlhjlhjlfdhkbfufbofffifbkjhbfkcbbcufufjfbdjkfbdjfbodufbsafjfbskfkbfjlksfbslfbsjlfbjsbfj@dontwannacry.com.ac9d1f911fa512f7804c18c5014b0022.web-security-academy.net
+17. Website> enter a password> click register.
+18. Website> go to my Account> refresh> Click of verification link
+19. Website> log on with new login.
+20. Website> You can now see the admin panel.

@@ -1,0 +1,22 @@
+Burp Scan issues to look for:
+	Password field with autocomplete enabled | Strict transport security not enforced>
+1. log unto web application> open Burp> intercept off
+2. WEBSITE> select a product> and click to enter the view
+3. WEBSITE> add to cart
+4. BURP> SEND get/cart + post/cart both TO REPEATER
+5. BURP> from REQUEST forward/SEND the post/cart to RESPONSE
+6. BURP> search for the price
+7. BURP> from REQUEST forward/SEND the post/cart to RESPONSE with a negative value if not able then with a lower value
+8. BURP> if you get a 302 request OK> then click FOLLOW REDIRECTION 
+9. BURP> go to REQUEST for get/cart> click SEND to response
+10. WEBSITE> Open chromiun browser> refresh cart tab
+11. WEBSITE> all items should be removed automatically
+12. WEBSITE> if not, then remove all items from cart one by one.
+13. WEBSITE> click on the home link> add this product again> add to cart
+14. Burp> INTERCEPT ON
+15. WEBSITE> add to cart
+16. BURP> change value
+17. BURP> click FORWARD
+18. BURP> INTERCEPT OFF
+19. WEBSITE> open cart> value should have changed to your amount
+20. WEBSITE> click place order

@@ -1,0 +1,23 @@
+Burp Scan issues to look for:
+	Password field with autocomplete enabled | Strict transport security not enforced>
+1. WEBSITE> open web application> open Burp> intercept off> 
+	log into website
+2. Website> go to My Account> 
+	update password.
+3. Burp> Proxy> Http History> Send "My-Account/Change Password" Request to REPEATER
+4. Burp> Repeater> Request> 
+	remove &current-password=peter parameter> 
+	and leave of new password parameter
+5. Burp> Send to RESPONSE> 
+	you should get 200 OK.
+6. Burp> Repeater> Request> 
+	change username to administrator> 
+7. Burp> Send to RESPONSE> 
+	you should get 200 OK.
+8. Website> go back to web page
+9. Website> 
+	Log out> 
+	then login with admin credentials>
+10. Website> You should now see the admin panel.
+
+

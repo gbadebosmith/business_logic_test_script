@@ -1,0 +1,12 @@
+1. log unto web application> open Burp> intercept off
+2. WEBSITE> select a product> and click to enter the view
+3. WEBSITE> add to cart> go to cart> add coupon code> click apply/submit
+4. WEBSITE> open home tab in new window
+5. WEBSITE> add email address to sign up for newsletter> click submit
+6. WEBSITE> pop up will appear> copy promo code
+7. WEBSITE> go to my cart> add new coupon code> submit
+8. WEBSITE> it deducts considerably more from your total
+9. WEBSITE> try and add original coupon again> submit
+10. WEBSITE> try and add second original coupon again> submit
+11. WEBSITE> keep rotating adding coupon until order is zero 0.
+12. WEBSITE> place order> successful 
